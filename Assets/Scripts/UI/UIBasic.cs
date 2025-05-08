@@ -12,6 +12,7 @@ public class UIBasic : MonoBehaviour
     [SerializeField] private Image HealthCircle;
     [Header("Energy System")]
     [SerializeField]private Image EnergyBar;
+    [SerializeField]private Image EnergyArea;
     [SerializeField]private EnergySystem energySystem;
     
     [Header("Visual Energy Settings")]
@@ -28,7 +29,7 @@ public class UIBasic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Update Lifesystem and EnergySystem"+ lifeSystem.Max + " " + lifeSystem.Current + " " + energySystem.Max + " " + energySystem.Current);
+        //Debug.Log("Update Lifesystem and EnergySystem"+ lifeSystem.Max + " " + lifeSystem.Current + " " + energySystem.Max + " " + energySystem.Current);
         if (lifeSystem != null )
         {
             // textMeshProUGUI.text = lifeSystem.Current.ToString("F0") + "/" + lifeSystem.Max.ToString("F0");
@@ -42,6 +43,8 @@ public class UIBasic : MonoBehaviour
 
             Color energyColor = Color.Lerp(lowEnergyr, fullEnergyr, EnergySlider.value);
             EnergyBar.fillAmount = energySystem.Current / energySystem.Max;
+            EnergyBar.color = energyColor;
+            EnergyArea.color=energyColor;
             EnergySlider.fillRect.GetComponent<Image>().color = energyColor;
         }
     }

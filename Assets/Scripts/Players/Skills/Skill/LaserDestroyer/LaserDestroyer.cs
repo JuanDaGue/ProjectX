@@ -18,7 +18,7 @@ public class LaserDestroyer : Skill
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         laserLine = playerTransform.GetComponentInChildren<LineRenderer>();
         
-        if(!isActive)
+        if (!isActive)
         {
             StartLaser();
         }
@@ -33,11 +33,12 @@ public class LaserDestroyer : Skill
         isActive = true;
         laserLine.enabled = true;
         // playerTransform.StartCoroutine(LaserRoutine());
+        Debug.Log("Destructor Ray activated! Enemies beware.");
     }
 
     private IEnumerator LaserRoutine()
     {
-        while(isActive)
+        while (isActive)
         {
             UpdateLaser();
             ApplyDamage();
@@ -47,29 +48,26 @@ public class LaserDestroyer : Skill
 
     private void UpdateLaser()
     {
-        RaycastHit2D hit = Physics2D.Raycast(
-            playerTransform.position, 
-            playerTransform.right, 
-            laserRange, 
-            targetLayers
-        );
-
-        laserLine.SetPosition(0, playerTransform.position);
-        laserLine.SetPosition(1, hit ? (Vector3)hit.point : playerTransform.position + playerTransform.right * laserRange);
+        RaycastHit hit;
+        if (Physics.Raycast(playerTransform.position, playerTransform.forward, out hit, laserRange, targetLayers))
+        {
+            laserLine.SetPosition(0, playerTransform.position);
+            laserLine.SetPosition(1, hit.point);
+        }
+        else
+        {
+            laserLine.SetPosition(0, playerTransform.position);
+            laserLine.SetPosition(1, playerTransform.position + playerTransform.forward * laserRange);
+        }
     }
 
     private void ApplyDamage()
     {
-        RaycastHit2D[] hits = Physics2D.RaycastAll(
-            playerTransform.position, 
-            playerTransform.right, 
-            laserRange, 
-            targetLayers
-        );
-
-        foreach(var hit in hits)
+        RaycastHit[] hits = Physics.RaycastAll(playerTransform.position, playerTransform.forward, laserRange, targetLayers);
+        
+        foreach (var hit in hits)
         {
-            if(hit.collider.TryGetComponent<LifeSystem>(out var healthSystem))
+            if (hit.collider.TryGetComponent<LifeSystem>(out var healthSystem))
             {
                 healthSystem.TakeDamage(damagePerSecond * Time.deltaTime);
             }

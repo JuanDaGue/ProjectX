@@ -59,7 +59,7 @@ void Update()
                 // Deal damage over time
                 other.GetComponent<LifeSystem>()?.TakeDamage(damagePerSecond * Time.deltaTime);
                 
-                Debug.Log("Damage dealt to player: " + other.name + " | Damage: " + damagePerSecond * Time.deltaTime);
+                //Debug.Log("Damage dealt to player: " + other.name + " | Damage: " + damagePerSecond * Time.deltaTime);
 
                 
             }

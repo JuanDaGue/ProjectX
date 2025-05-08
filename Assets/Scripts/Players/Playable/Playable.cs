@@ -57,6 +57,7 @@ public class Playable : Carrier
     /// </summary>
     public bool TryUseSkill(int skillIndex)
     {
+        Debug.Log(skillSystem.Skills.Count);
         if (skillIndex < 0 || skillIndex >= skillSystem.Skills.Count) return false;
 
         Skill skill = skillSystem.Skills[skillIndex];

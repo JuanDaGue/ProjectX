@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class NoPlayable : Carrier
 {
-    [Header("AI Settings")]
+    [Header("No Playable Settings")]
     [SerializeField] protected float detectionRange = 5f;
     [SerializeField] protected float moveSpeed = 3f;
     

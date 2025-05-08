@@ -11,7 +11,7 @@ public class Hades : Playable
     {
         base.Update();
 
-        if(Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             TryLifeDrain();
         }
@@ -19,12 +19,14 @@ public class Hades : Playable
 
     private void TryLifeDrain()
     {
-        if(TryUseSkill(1))
+        if (TryUseSkill(1))
         {
-            Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, 5f);
-            foreach(var enemy in enemies)
+            // Get the enemies coliders //
+            Collider[] enemies = Physics.OverlapSphere(transform.position, 5f);
+            Debug.Log(enemies);
+            foreach (var enemy in enemies)
             {
-                if(enemy.TryGetComponent<Carrier>(out var enemyHealth))
+                if (enemy.TryGetComponent<Carrier>(out var enemyHealth))
                 {
                     enemyHealth.TakeDamage(lifeDrainAmount);
                     Heal(lifeDrainAmount * 0.5f); // Heal 50% of damage dealt

@@ -4,7 +4,7 @@ using UnityEngine.Events;
 [System.Serializable]
 public class StatEvent : UnityEvent<float> { }
 
-public class Statistics : MonoBehaviour
+public  class Statistics: MonoBehaviour 
 {
     [Header("Base Settings")]
     [SerializeField] protected float maxValue = 100f;
@@ -24,7 +24,7 @@ public class Statistics : MonoBehaviour
     {
         ClampCurrentValue();
     }
-
+    //Initialize the values//
     public virtual void Initialize(float newMax, float newMin, float startValue)
     {
         maxValue = newMax;
@@ -32,12 +32,14 @@ public class Statistics : MonoBehaviour
         currentValue = startValue;
         ClampCurrentValue();
     }
+    //Set the max value//
 
     public virtual void SetToMax()
     {
         currentValue = maxValue;
         NotifyValueChanged();
     }
+    //Set Min Value//
 
     public virtual void SetToMin()
     {
@@ -45,6 +47,7 @@ public class Statistics : MonoBehaviour
         NotifyValueChanged();
         OnMinReached?.Invoke();
     }
+    //Add the values//
 
     public virtual void Add(float amount)
     {
@@ -53,6 +56,7 @@ public class Statistics : MonoBehaviour
         ClampCurrentValue();
         NotifyValueChanged();
     }
+    //substract values//
 
     public virtual void Subtract(float amount)
     {
@@ -61,6 +65,7 @@ public class Statistics : MonoBehaviour
         ClampCurrentValue();
         NotifyValueChanged();
     }
+    //Encapsulare values//
 
     protected virtual void ClampCurrentValue()
     {

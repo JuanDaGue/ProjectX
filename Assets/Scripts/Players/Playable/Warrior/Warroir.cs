@@ -18,6 +18,7 @@ public class Warroir : Playable
 
         if(Input.GetKeyDown(KeyCode.Mouse1))
         {
+            Debug.Log("Special Attack");
             TrySpecialAttack();
         }
     }
@@ -33,6 +34,7 @@ public class Warroir : Playable
         if(base.TryUseSkill(0))
         {
             Debug.Log("Warrior special attack!");
+            TakeDamage(10.0f);
             // Add special attack implementation
         }
     }
