@@ -32,7 +32,8 @@ public class LaserDestroyer : Skill
     {
         isActive = true;
         laserLine.enabled = true;
-        // playerTransform.StartCoroutine(LaserRoutine());
+        //playerTransform.StartCoroutine(LaserRoutine());
+        LaserRoutine();
         Debug.Log("Destructor Ray activated! Enemies beware.");
     }
 

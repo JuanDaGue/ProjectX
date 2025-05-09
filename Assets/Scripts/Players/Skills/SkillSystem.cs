@@ -16,9 +16,9 @@ public class SkillSystem : MonoBehaviour
     [SerializeField] private List<SkillSlot> skillSlots = new List<SkillSlot>();
     [SerializeField] private float globalCooldown = 0.5f;
     public List<Skill> Skills { get; set; } = new List<Skill>();
-    
+    public List<SkillSlot> SkillSlots => skillSlots;
     private Dictionary<string, float> cooldownTimers = new Dictionary<string, float>();
-    private EnergySystem energySystem;
+    //private EnergySystem energySystem;
     
     [Header("Events")]
     public UnityEvent<string> OnSkillUsed;
@@ -26,7 +26,6 @@ public class SkillSystem : MonoBehaviour
 
     private void Awake()
     {
-        energySystem = GetComponent<EnergySystem>();
         InitializeCooldownDictionary();
     }
 
@@ -38,44 +37,24 @@ public class SkillSystem : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        HandleSkillInput();
-        UpdateCooldowns();
-    }
 
-    private void HandleSkillInput()
+    public bool TryUseSkill(SkillSlot slot)
     {
-        foreach(var slot in skillSlots)
-        {
-            if(Input.GetKeyDown(slot.activationKey)) 
-            {
-                TryUseSkill(slot);
-            }
-        }
-    }
-
-    private void TryUseSkill(SkillSlot slot)
-    {
-        if(slot.isOnCooldown) return;
-        if(!energySystem.TryUseEnergy(slot.skill.energyCost)) return;
-        
-        StartCoroutine(GlobalCooldown());
-        StartCoroutine(SkillCooldown(slot));
+        if (slot.isOnCooldown) return false;
         slot.skill.Use();
         OnSkillUsed?.Invoke(slot.skill.skillID);
+        StartCoroutine(SkillCooldown(slot));
+        //GetCooldownProgress(slot.skill.skillID);
+        Debug.Log($"Skill {GetCooldownProgress(slot.skill.skillID)} used!");
+        return true;
     }
 
-    private System.Collections.IEnumerator GlobalCooldown()
-    {
-        yield return new WaitForSeconds(globalCooldown);
-    }
 
     private System.Collections.IEnumerator SkillCooldown(SkillSlot slot)
     {
         slot.isOnCooldown = true;
         cooldownTimers[slot.skill.skillID] = slot.skill.cooldown;
-        
+        Debug.Log($"Skill {slot.skill.skillID} is on cooldown for {slot.skill.cooldown} seconds.");
         while(cooldownTimers[slot.skill.skillID] > 0)
         {
             cooldownTimers[slot.skill.skillID] -= Time.deltaTime;
@@ -84,11 +63,6 @@ public class SkillSystem : MonoBehaviour
         
         slot.isOnCooldown = false;
         OnSkillReady?.Invoke(slot.skill.skillID);
-    }
-
-    private void UpdateCooldowns()
-    {
-        // Optional: Update UI elements here
     }
 
     public float GetCooldownProgress(string skillID)

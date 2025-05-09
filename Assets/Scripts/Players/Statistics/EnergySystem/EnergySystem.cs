@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnergySystem : Statistics
 {
-      [Header("Energy Settings")]
+    [Header("Energy Settings")]
     [SerializeField] private float rechargeRate = 5f;
     [SerializeField] private bool autoRegenerate = true;
 

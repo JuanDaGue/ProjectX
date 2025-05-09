@@ -9,7 +9,7 @@ public class EnergyReload : MonoBehaviour
     [SerializeField] private EnergySystem energySystem;
 
     private bool isPlayerInZone = false;
-    private float rechargeTimer = 0f;
+    
 
     private void OnTriggerEnter(Collider other)
     {

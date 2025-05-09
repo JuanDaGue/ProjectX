@@ -20,6 +20,8 @@ public class UIBasic : MonoBehaviour
     [SerializeField] private Color fullEnergyr = Color.green;
     [SerializeField] private Color lowEnergyr = Color.red;
     [SerializeField] private Color HealthColor = Color.blue;
+    [SerializeField] private SkillSystem skillSystem;
+    [SerializeField] private Image EnergyCircleCooldown;
     
     void Start()
     {
@@ -47,5 +49,20 @@ public class UIBasic : MonoBehaviour
             EnergyArea.color=energyColor;
             EnergySlider.fillRect.GetComponent<Image>().color = energyColor;
         }
+        if (skillSystem != null && EnergyCircleCooldown != null)
+        {
+            foreach (var slot in skillSystem.SkillSlots)
+            {
+                if (slot.isOnCooldown)
+                {
+                    EnergyCircleCooldown.fillAmount = skillSystem.GetCooldownProgress(slot.skill.skillID);
+                }
+                else
+                {
+                    EnergyCircleCooldown.fillAmount = 1f;
+                }
+            }
+        }
+
     }
 }

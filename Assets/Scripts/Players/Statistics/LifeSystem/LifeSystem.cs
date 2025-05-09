@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class LifeSystem : Statistics
 {
- [Header("Health Events")]
+    [Header("Health Events")]
     public UnityEvent OnDeath;
 
     public void TakeDamage(float damage)

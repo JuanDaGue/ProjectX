@@ -6,41 +6,32 @@ public class Warroir : Playable
     [Header("Warrior Specific")]
     [SerializeField] private float attackDamage = 20f;
     [SerializeField] private float specialAttackCost = 30f;
+    private new SkillSystem skillSystem;
+private EnergySystem energySystem;
+private LifeSystem lifeSystem;
+        private void Awake()
+    {
+        energySystem = GetComponent<EnergySystem>();
+        //lifeSystem = GetComponent<LifeSystem>();
+        skillSystem = GetComponent<SkillSystem>();
+    }
 
     protected override void Update()
     {
-        base.Update();
 
-        if(Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            PerformBasicAttack();
-        }
-
-        if(Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            Debug.Log("Special Attack");
-            TrySpecialAttack();
-        }
+        HandleSkillInput();
     }
 
-    private void PerformBasicAttack()
-    {
-        // Implement attack logic
-        Debug.Log("Warrior basic attack!");
-    }
 
-    private void TrySpecialAttack()
+        private void HandleSkillInput()
     {
-        if(base.TryUseSkill(0))
+        foreach (var slot in skillSystem.SkillSlots)
         {
-            Debug.Log("Warrior special attack!");
-            TakeDamage(10.0f);
-            // Add special attack implementation
+            if (Input.GetKeyDown(slot.activationKey))
+            {
+                skillSystem.TryUseSkill(slot);
+                if (!energySystem.TryUseEnergy(slot.skill.energyCost)) return ;
+            }
         }
-    }
-
-    public override void TakeDamage(float damage)
-    {
-        base.TakeDamage(damage * 0.9f); // 10% damage reduction
     }
 }
