@@ -6,6 +6,7 @@ public class UIBasic : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [Header("Health System")]
+    [SerializeField] private Warroir warroir;
     [SerializeField]private TextMeshProUGUI textMeshProUGUI;
     [SerializeField]private LifeSystem lifeSystem;
     [SerializeField]private Image lifeBar;
@@ -21,7 +22,10 @@ public class UIBasic : MonoBehaviour
     [SerializeField] private Color lowEnergyr = Color.red;
     [SerializeField] private Color HealthColor = Color.blue;
     [SerializeField] private SkillSystem skillSystem;
+    [Header("CoolDown")]
     [SerializeField] private Image EnergyCircleCooldown;
+    [SerializeField] private Image EnergyRayCooldown;
+
     
     void Start()
     {
@@ -49,17 +53,21 @@ public class UIBasic : MonoBehaviour
             EnergyArea.color=energyColor;
             EnergySlider.fillRect.GetComponent<Image>().color = energyColor;
         }
-        if (skillSystem != null && EnergyCircleCooldown != null)
+        //Cooldown UI//
+        if (skillSystem != null && EnergyCircleCooldown != null && EnergyRayCooldown != null)
         {
             foreach (var slot in skillSystem.SkillSlots)
-            {
+            {   
                 if (slot.isOnCooldown)
                 {
+                    Debug.Log("UIIIII "+ slot.skill.skillID +" Name "+ slot.skill.skillName);
                     EnergyCircleCooldown.fillAmount = skillSystem.GetCooldownProgress(slot.skill.skillID);
+                    EnergyRayCooldown.fillAmount = skillSystem.GetCooldownProgress(slot.skill.skillID);
                 }
                 else
                 {
                     EnergyCircleCooldown.fillAmount = 1f;
+                    EnergyRayCooldown.fillAmount = 1f;
                 }
             }
         }

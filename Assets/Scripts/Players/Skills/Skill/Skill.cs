@@ -6,7 +6,7 @@ public abstract class Skill: ScriptableObject
     public string skillName;
     public float energyCost;
     public float cooldown;
-    public Sprite icon;
+    public GameObject icon;
     public AudioClip soundEffect;
     public GameObject visualEffect;
 

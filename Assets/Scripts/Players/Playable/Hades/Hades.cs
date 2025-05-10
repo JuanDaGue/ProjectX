@@ -6,37 +6,31 @@ public class Hades : Playable
     [Header("Hades Specific")]
     [SerializeField] private float darkPower = 1.2f;
     [SerializeField] private float lifeDrainAmount = 15f;
+    private LifeSystem lifeSystem;
+    // private new SkillSystem skillSystem;
+
+    private void Awake()
+    {
+
+        // lifeSystem = GetComponent<LifeSystem>();
+        // skillSystem = GetComponent<SkillSystem>();
+    }
 
     protected override void Update()
     {
-        base.Update();
+        HandleSkillInput();
+    }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+    private void HandleSkillInput()
+    {
+        foreach (var slot in skillSystem.SkillSlots)
         {
-            TryLifeDrain();
+            if (Input.GetKeyDown(slot.activationKey))
+            {
+                skillSystem.TryUseSkill(slot);
+                //if (!lifeSystem.TakeDamage(slot.skill.energyCost)) return ;
+                lifeSystem.TakeDamage(slot.skill.energyCost);
+            }
         }
-    }
-
-    private void TryLifeDrain()
-    {
-        // if (TryUseSkill(1))
-        // {
-        //     // Get the enemies coliders //
-        //     Collider[] enemies = Physics.OverlapSphere(transform.position, 5f);
-        //     Debug.Log(enemies);
-        //     foreach (var enemy in enemies)
-        //     {
-        //         if (enemy.TryGetComponent<Carrier>(out var enemyHealth))
-        //         {
-        //             enemyHealth.TakeDamage(lifeDrainAmount);
-        //             Heal(lifeDrainAmount * 0.5f); // Heal 50% of damage dealt
-        //         }
-        //     }
-        // }
-    }
-
-    public override void TakeDamage(float damage)
-    {
-        base.TakeDamage(damage * darkPower); // Takes extra damage
     }
 }

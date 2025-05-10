@@ -1,51 +1,36 @@
 using UnityEngine;
-using System.Collections;
 
 [CreateAssetMenu(menuName = "Skills/Teleport")]
 public class Teleport : Skill
 {
-
     [Header("Teleport Settings")]
-    [SerializeField] private float maxDistance = 10f;
-    [SerializeField] private float castTime = 0.5f;
+    [SerializeField] private float forceAmount = 500f;
+    [SerializeField] private float upwardBoost = 2f;
 
-
-    private Transform playerTransform;
+    private Rigidbody playerRb;
 
     public override void Use()
     {
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        //playerTransform.StartCoroutine(TeleportRoutine());
-        TeleportRoutine();
-        Debug.Log("Teleporting to a new location!");
-    }
-    
-
-    private IEnumerator TeleportRoutine()
-    {
-        
-        Vector3 targetPosition = playerTransform.position + playerTransform.forward * maxDistance;
-        
-        float elapsedTime = 0f;
-        while(elapsedTime < castTime)
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
         {
-            if(Input.GetMouseButton(1)) 
+            playerRb = player.GetComponent<Rigidbody>();
+
+            if (playerRb != null)
             {
-                Cancel();
-                yield break;
+                Vector3 forceDirection = player.transform.forward * forceAmount + Vector3.up * upwardBoost;
+                playerRb.AddForce(forceDirection, ForceMode.Impulse);
+                Debug.Log("Teleporting with force!");
             }
-            
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            else
+            {
+                Debug.LogWarning("Player Rigidbody not found!");
+            }
         }
-        playerTransform.position = targetPosition;
-
     }
-
 
     public override void Cancel()
     {
-        //cancellation effects
         Debug.Log("Teleport cancelled!");
     }
 }

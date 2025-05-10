@@ -14,7 +14,7 @@ public class SkillSystem : MonoBehaviour
 
     [Header("Skill Settings")]
     [SerializeField] private List<SkillSlot> skillSlots = new List<SkillSlot>();
-    [SerializeField] private float globalCooldown = 0.5f;
+    //[SerializeField] private float globalCooldown = 0.5f;
     public List<Skill> Skills { get; set; } = new List<Skill>();
     public List<SkillSlot> SkillSlots => skillSlots;
     private Dictionary<string, float> cooldownTimers = new Dictionary<string, float>();
@@ -45,7 +45,7 @@ public class SkillSystem : MonoBehaviour
         OnSkillUsed?.Invoke(slot.skill.skillID);
         StartCoroutine(SkillCooldown(slot));
         //GetCooldownProgress(slot.skill.skillID);
-        Debug.Log($"Skill {GetCooldownProgress(slot.skill.skillID)} used!");
+        //Debug.Log($"Skill {GetCooldownProgress(slot.skill.skillID)} used!");
         return true;
     }
 
@@ -54,10 +54,11 @@ public class SkillSystem : MonoBehaviour
     {
         slot.isOnCooldown = true;
         cooldownTimers[slot.skill.skillID] = slot.skill.cooldown;
-        Debug.Log($"Skill {slot.skill.skillID} is on cooldown for {slot.skill.cooldown} seconds.");
+        //Debug.Log($"Skill {slot.skill.skillID} is on cooldown for {slot.skill.cooldown} seconds.");
         while(cooldownTimers[slot.skill.skillID] > 0)
         {
             cooldownTimers[slot.skill.skillID] -= Time.deltaTime;
+            //Debug.Log("CooldownTimers"+ cooldownTimers[slot.skill.skillID]);
             yield return null;
         }
         
@@ -67,8 +68,11 @@ public class SkillSystem : MonoBehaviour
 
     public float GetCooldownProgress(string skillID)
     {
-        return cooldownTimers.ContainsKey(skillID) ? 
+        float cooldownTime=cooldownTimers.ContainsKey(skillID) ? 
             1 - (cooldownTimers[skillID] / skillSlots.Find(s => s.skill.skillID == skillID).skill.cooldown) : 
             0f;
+            Debug.Log("CoolDown Timers"+cooldownTimers.ContainsKey(skillID)+" Skill ID"+ skillID );
+            Debug.Log("Get CoolDown Progress"+cooldownTime);    
+        return cooldownTime;
     }
 }
