@@ -9,7 +9,7 @@ public class Teleport : Skill
 
     private Rigidbody playerRb;
 
-    public override void Use()
+    public override void Use(GameObject user)
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)

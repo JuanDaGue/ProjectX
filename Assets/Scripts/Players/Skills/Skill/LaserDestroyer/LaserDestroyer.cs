@@ -13,10 +13,10 @@ public class LaserDestroyer : Skill
     private LineRenderer laserLine;
     private bool isActive;
 
-    public override void Use()
+    public override void Use(GameObject user)
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        Debug.Log(playerTransform);
+        //Debug.Log(playerTransform);
         laserLine = playerTransform.GetComponentInChildren<LineRenderer>();
         
         if (!isActive)

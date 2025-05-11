@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1afb303f9f4fa3a43951ee521e3677e8, type: 3}
+  m_Name: New Damage Zone Skill
+  m_EditorClassIdentifier: 
+  skillID: 5
+  skillName: ZoneAtack
+  energyCost: 30
+  cooldown: 5
+  icon: {fileID: 21300000, guid: f85ea78a8f8f76546a8d8affdc6d19aa, type: 3}
+  soundEffect: {fileID: 0}
+  visualEffect: {fileID: 0}
+  zonePrefab: {fileID: 7728127162809814843, guid: 8d5f287f51e7f0d4f8124ee29a9f7c4a, type: 3}
+  zoneDuration: 5

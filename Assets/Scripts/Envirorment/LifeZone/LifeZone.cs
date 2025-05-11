@@ -9,7 +9,7 @@ public class LifeZone : MonoBehaviour
     [SerializeField] private LifeSystem lifeSystem; // Reference to the LifeSystem component
     
     private bool isPlayerInZone = false;
-    private float rechargeTimer = 0f;
+    //private float rechargeTimer = 0f;
 
 
     private void OnTriggerEnter(Collider other)

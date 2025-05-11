@@ -9,6 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: (TTFE)GlobalGizmo_Base
   m_Shader: {fileID: 4800000, guid: 6f53b8cb323b0614c82237d5b033019f, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _WINDTYPE_GENTLEBREEZE
   m_InvalidKeywords:
@@ -22,6 +24,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -154,7 +157,7 @@ Material:
     - _Radius2: 100
     - _RandomContrast: 0
     - _RandomContrastOnOff: 0
-    - _SeasonChangeGlobal: -2
+    - _SeasonChangeGlobal: 0
     - _SeasonVertexColorR: 0
     - _SelfShadingVertexColor: 0
     - _SimplePivotSway: 0
@@ -187,3 +190,4 @@ Material:
     - _DryLeafColor: {r: 1, g: 0.2850455, b: 0, a: 0}
     - _EmissionColor: {r: 0.09411765, g: 0.32941177, b: 0, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

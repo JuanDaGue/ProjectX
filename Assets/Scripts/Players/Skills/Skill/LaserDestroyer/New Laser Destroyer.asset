@@ -16,7 +16,7 @@ MonoBehaviour:
   skillName: Laser
   energyCost: 40
   cooldown: 5
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 53085f18b2c38eb4e8539c23811c3347, type: 3}
   soundEffect: {fileID: 0}
   visualEffect: {fileID: 0}
   laserRange: 20

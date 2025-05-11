@@ -41,9 +41,9 @@ public class SkillSystem : MonoBehaviour
     public bool TryUseSkill(SkillSlot slot)
     {
         if (slot.isOnCooldown) return false;
-        slot.skill.Use();
-        OnSkillUsed?.Invoke(slot.skill.skillID);
+        slot.skill.Use(gameObject);
         StartCoroutine(SkillCooldown(slot));
+        OnSkillUsed?.Invoke(slot.skill.skillID);
         //GetCooldownProgress(slot.skill.skillID);
         //Debug.Log($"Skill {GetCooldownProgress(slot.skill.skillID)} used!");
         return true;
@@ -71,8 +71,8 @@ public class SkillSystem : MonoBehaviour
         float cooldownTime=cooldownTimers.ContainsKey(skillID) ? 
             1 - (cooldownTimers[skillID] / skillSlots.Find(s => s.skill.skillID == skillID).skill.cooldown) : 
             0f;
-            Debug.Log("CoolDown Timers"+cooldownTimers.ContainsKey(skillID)+" Skill ID"+ skillID );
-            Debug.Log("Get CoolDown Progress"+cooldownTime);    
+            // Debug.Log("CoolDown Timers"+cooldownTimers.ContainsKey(skillID)+" Skill ID"+ skillID );
+            // Debug.Log("Get CoolDown Progress"+cooldownTime);    
         return cooldownTime;
     }
 }

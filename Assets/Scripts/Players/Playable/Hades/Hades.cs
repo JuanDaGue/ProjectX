@@ -4,8 +4,8 @@ public class Hades : Playable
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [Header("Hades Specific")]
-    [SerializeField] private float darkPower = 1.2f;
-    [SerializeField] private float lifeDrainAmount = 15f;
+    //[SerializeField] private float darkPower = 1.2f;
+    //[SerializeField] private float lifeDrainAmount = 15f;
     private LifeSystem lifeSystem;
     // private new SkillSystem skillSystem;
 

@@ -6,10 +6,11 @@ public class Warroir : Playable
     [Header("Warrior Specific")]
     //private new SkillSystem skillSystem;
     private EnergySystem energySystem;
-    //private LifeSystem lifeSystem;
+    private LifeSystem lifeSystem;
     private void Awake()
     {
         energySystem = GetComponent<EnergySystem>();
+        lifeSystem = GetComponent<LifeSystem>();
         //skillSystem = GetComponent<SkillSystem>();
     }
 

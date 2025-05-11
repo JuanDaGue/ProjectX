@@ -16,11 +16,8 @@ MonoBehaviour:
   skillName: Telepor
   energyCost: 30
   cooldown: 5
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 8d41c4d75ffb95449ad8cdbfefa74218, type: 3}
   soundEffect: {fileID: 0}
   visualEffect: {fileID: 0}
-  maxDistance: 10
-  castTime: 0.5
-  validLayers:
-    serializedVersion: 2
-    m_Bits: 0
+  forceAmount: 500
+  upwardBoost: 2

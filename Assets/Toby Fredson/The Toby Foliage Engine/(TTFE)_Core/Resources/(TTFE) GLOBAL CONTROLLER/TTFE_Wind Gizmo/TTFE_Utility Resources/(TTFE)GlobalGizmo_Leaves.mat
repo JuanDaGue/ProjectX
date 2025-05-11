@@ -150,7 +150,7 @@ Material:
     - _Radius: 2
     - _RandomContrast: 0
     - _RandomContrastOnOff: 0
-    - _SeasonChangeGlobal: -2
+    - _SeasonChangeGlobal: 0
     - _SeasonVertexColorR: 0
     - _SelfShadingVertexColor: 0
     - _SimplePivotSway: 0
