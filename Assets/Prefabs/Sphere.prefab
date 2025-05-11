@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6891565926370603199}
   - component: {fileID: 7419764853525199548}
   - component: {fileID: 6538044914710567509}
-  - component: {fileID: 675266831894041251}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -117,7 +116,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1614381159210905582}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 523e2221c0f7d2749afb17fd18c842cc, type: 3}
   m_Name: 
@@ -130,17 +129,3 @@ MonoBehaviour:
   stormVolume: {fileID: 0}
   zoneCollider: {fileID: 7419764853525199548}
   zoneVisual: {fileID: 0}
---- !u!114 &675266831894041251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1614381159210905582}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 516adde09da309b4aaaabe26b2f8a259, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyDelay: 0.2
-  impactEffect: {fileID: 0}

@@ -60,7 +60,7 @@ public class UIBasic : MonoBehaviour
             {   
                 if (slot.isOnCooldown)
                 {
-                    Debug.Log("UIIIII "+ slot.skill.skillID +" Name "+ slot.skill.skillName);
+                    //Debug.Log("UIIIII "+ slot.skill.skillID +" Name "+ slot.skill.skillName);
                     EnergyCircleCooldown.fillAmount = skillSystem.GetCooldownProgress(slot.skill.skillID);
                     EnergyRayCooldown.fillAmount = skillSystem.GetCooldownProgress(slot.skill.skillID);
                 }

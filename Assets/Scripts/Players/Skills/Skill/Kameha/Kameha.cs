@@ -42,7 +42,7 @@ public class Kamehameha : Skill
         // Calculate damage based on charge time
         float damage = Mathf.Lerp(baseDamage, maxDamage, chargeTimer / maxChargeTime);
         
-        Vector3 spawnPosition = userTransform.position + userTransform.forward * 1.5f;
+        Vector3 spawnPosition = userTransform.position + userTransform.forward * 2.5f + Vector3.up * 1.1f;
         currentProjectile = Instantiate(kamehamehaPrefab, spawnPosition, userTransform.rotation);
         
         KamehamehaProjectile projectile = currentProjectile.GetComponent<KamehamehaProjectile>();

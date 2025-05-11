@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1111082608116784994}
   - component: {fileID: 4889008020849593962}
   - component: {fileID: 6229652357150946853}
-  - component: {fileID: 7428723022691631420}
   m_Layer: 6
   m_Name: LifeReloaded
   m_TagString: Untagged
@@ -66,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: acd8f714506fd6540a36a074eb7f1491, type: 2}
+  - {fileID: 2100000, guid: 764ca85244fe1b84098c95e706e8bd59, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,18 +109,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &7428723022691631420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5706781204565063542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6db8d0f562247ee43b5c15314071fbcf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7728127162809814843
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,6 +121,7 @@ GameObject:
   - component: {fileID: 128030462873347667}
   - component: {fileID: 2151714383014915481}
   - component: {fileID: 5920676417983614370}
+  - component: {fileID: 6080740886610214087}
   m_Layer: 6
   m_Name: ZoneDamageSkill
   m_TagString: Untagged
@@ -231,3 +219,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8169858, y: 5.8094416, z: 0.80221146}
   m_Center: {x: -0.0018989643, y: -1.9047188, z: -0.0016582807}
+--- !u!114 &6080740886610214087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7728127162809814843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db8d0f562247ee43b5c15314071fbcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

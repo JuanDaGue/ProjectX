@@ -1,6 +1,6 @@
 using UnityEngine;
 
-   // Separate class for zone behavior
+
     public class ZonePrefabs : MonoBehaviour
     {
         private float dps;
@@ -47,4 +47,17 @@ using UnityEngine;
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, radius);
         }
+    void OnTriggerStay(Collider other)
+    {
+        Debug.Log("DamageZone: " + other.name); 
+        if (other.CompareTag("Enemy"))
+        {
+            Debug.Log("DamageZone: " + other.name);
+            if (other.TryGetComponent<LifeSystem>(out LifeSystem health))  // Get health component
+            if (health != null)
+            {
+                health.TakeDamage(dps * Time.deltaTime); // Full damage per second
+            }
+        }
     }
+}

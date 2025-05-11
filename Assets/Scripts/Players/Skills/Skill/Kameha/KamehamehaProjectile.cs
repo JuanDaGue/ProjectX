@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class KamehamehaProjectile : MonoBehaviour
 {
-
     [SerializeField] private float destroyDelay = 0.2f;
-    [SerializeField] private ParticleSystem impactEffect;
-    
+    [SerializeField] private GameObject impactEffect;
+
     private float damage;
     private float speed;
     private Vector3 direction;
@@ -15,7 +14,7 @@ public class KamehamehaProjectile : MonoBehaviour
         this.damage = damage;
         this.speed = speed;
         this.direction = direction;
-        Destroy(gameObject, 5f); // Auto-destroy after 5 seconds
+        Destroy(gameObject, 2f);
     }
 
     private void Update()
@@ -25,23 +24,35 @@ public class KamehamehaProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Terrain") || other.CompareTag("Enemy"))
+        Debug.Log("Kameha: " + other.name + "   The tag is " + other.tag);
+        
+        // Check if the collider is an impact target.
+        if (other.CompareTag("Terrain") || other.CompareTag("Enemy") || other.CompareTag("Player"))
         {
-            // Apply damage to enemies
-            if (other.TryGetComponent<LifeSystem>(out var enemyHealth))
-            {
-                enemyHealth.TakeDamage(damage);
-            }
+            Debug.Log("Kameha: Collision with " + other.name);
 
-            // Play impact effect
-            if (impactEffect != null)
+            // If the target has a LifeSystem component, apply damage.
+            if (other.TryGetComponent<LifeSystem>(out var lifeSystem))
             {
-                ParticleSystem effect = Instantiate(impactEffect, transform.position, Quaternion.identity);
-                effect.Play();
-                Destroy(effect.gameObject, effect.main.duration);
+                lifeSystem.TakeDamage(damage);
             }
+            
 
             Destroy(gameObject, destroyDelay);
+        }
+    }
+
+        private void OnDestroy()
+    {
+        if (impactEffect != null)
+        {
+            GameObject effectObject = Instantiate(impactEffect, transform.position, Quaternion.identity);
+            ParticleSystem effect = effectObject.GetComponent<ParticleSystem>();
+            if (effect != null)
+            {
+                effect.Play();
+                Destroy(effectObject, effect.main.duration);
+            }
         }
     }
 }
