@@ -11,7 +11,10 @@ public class LifeZone : MonoBehaviour
     private bool isPlayerInZone = false;
     //private float rechargeTimer = 0f;
 
-
+    private void Awake()
+    {
+        
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -24,6 +27,7 @@ public class LifeZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            lifeSystem= other.GetComponent<LifeSystem>();
             isPlayerInZone = false;
             StopAllCoroutines();
         }

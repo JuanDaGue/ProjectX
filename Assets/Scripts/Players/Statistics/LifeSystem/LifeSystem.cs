@@ -18,4 +18,14 @@ public class LifeSystem : Statistics
         if (amount < 0) return;
         Add(amount);
     }
+        public bool CanTakeDamage(float amount)
+    {
+        if (Current >= amount)
+            {
+                Subtract(amount);
+                return true;
+            }
+        return false;
+    }
+
 }

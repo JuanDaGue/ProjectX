@@ -12,7 +12,7 @@ public class Hades : Playable
     private void Awake()
     {
 
-        // lifeSystem = GetComponent<LifeSystem>();
+        lifeSystem = GetComponent<LifeSystem>();
         // skillSystem = GetComponent<SkillSystem>();
     }
 
@@ -28,8 +28,11 @@ public class Hades : Playable
             if (Input.GetKeyDown(slot.activationKey))
             {
                 skillSystem.TryUseSkill(slot);
-                //if (!lifeSystem.TakeDamage(slot.skill.energyCost)) return ;
-                lifeSystem.TakeDamage(slot.skill.energyCost);
+                if (!lifeSystem.CanTakeDamage(slot.skill.energyCost)) return;
+                skillSystem.GetCooldownProgress(slot.skill.skillID);
+                Debug.Log("Hades TakeDamage"+ slot.skill.energyCost);
+                //lifeSystem.TakeDamage(slot.skill.energyCost);
+                
             }
         }
     }

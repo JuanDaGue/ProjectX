@@ -16,6 +16,7 @@ public class EnergyReload : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInZone = true;
+            energySystem = other.GetComponent<EnergySystem>();
             StartCoroutine(RechargeEnergy());
         }
     }
