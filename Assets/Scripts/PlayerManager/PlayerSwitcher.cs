@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro; // Required for TextMeshProUGUI
 
 public class PlayerSwitcher : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class PlayerSwitcher : MonoBehaviour
     
     [Tooltip("Second player's GameObject (should be inactive at start).")]
     [SerializeField] private GameObject playerTwo;
-
+    public TextMeshProUGUI textMeshProUGUI;
     // Flag to track which player is currently active.
     private bool isPlayerOneActive = true;
 
@@ -20,7 +21,7 @@ public class PlayerSwitcher : MonoBehaviour
             Debug.LogError("Both playerOne and playerTwo must be assigned in the Inspector.");
             return;
         }
-
+        textMeshProUGUI.text = "Switch player press F or Right Mouse Button";
         // Set initial state: Player One is active, Player Two is disabled.
         playerOne.SetActive(true);
         playerTwo.SetActive(false);
@@ -30,10 +31,11 @@ public class PlayerSwitcher : MonoBehaviour
     private void Update()
     {
         // Listen for the right mouse button click.
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.F))
         {
             SwitchPlayers();
         }
+
     }
 
     /// <summary>
@@ -58,6 +60,7 @@ public class PlayerSwitcher : MonoBehaviour
 
             // Update the flag.
             isPlayerOneActive = false;
+            textMeshProUGUI.text = playerTwo.name + " is active";
         }
         else
         {
@@ -75,6 +78,7 @@ public class PlayerSwitcher : MonoBehaviour
 
             // Update the flag.
             isPlayerOneActive = true;
+            textMeshProUGUI.text = playerOne.name + " is active";
         }
     }
 }
