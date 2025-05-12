@@ -7,12 +7,14 @@ public class Hades : Playable
     //[SerializeField] private float darkPower = 1.2f;
     //[SerializeField] private float lifeDrainAmount = 15f;
     private LifeSystem lifeSystem;
+    private EnergySystem energySystem;
     // private new SkillSystem skillSystem;
 
     private void Awake()
     {
 
         lifeSystem = GetComponent<LifeSystem>();
+        energySystem = GetComponent<EnergySystem>();
         // skillSystem = GetComponent<SkillSystem>();
     }
 
