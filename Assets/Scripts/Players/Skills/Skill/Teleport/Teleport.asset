@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 908097b3e171c97408b8442d3c18e62d, type: 3}
-  m_Name: New Teleport
+  m_Name: Teleport
   m_EditorClassIdentifier: 
-  skillID: 2
-  skillName: Telepor
-  energyCost: 30
-  cooldown: 5
-  icon: {fileID: 21300000, guid: 8d41c4d75ffb95449ad8cdbfefa74218, type: 3}
+  skillID: 
+  skillName: 
+  energyCost: 0
+  cooldown: 0
+  icon: {fileID: 0}
   soundEffect: {fileID: 0}
   visualEffect: {fileID: 0}
-  forceAmount: 500
-  upwardBoost: 2
+  teleportDistance: 10

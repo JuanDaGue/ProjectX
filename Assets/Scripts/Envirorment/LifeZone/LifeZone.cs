@@ -19,6 +19,7 @@ public class LifeZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            lifeSystem= other.GetComponent<LifeSystem>();
             isPlayerInZone = true;
             StartCoroutine(RechargeLife());
         }
@@ -27,7 +28,7 @@ public class LifeZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            lifeSystem= other.GetComponent<LifeSystem>();
+            
             isPlayerInZone = false;
             StopAllCoroutines();
         }

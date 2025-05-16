@@ -4,10 +4,9 @@ using TMPro;
 
 public class UIBasic : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     [Header("Health System")]
-    [SerializeField] private Warroir warroir;
-    [SerializeField]private TextMeshProUGUI textMeshProUGUI;
+
     [SerializeField]private LifeSystem lifeSystem;
     [SerializeField]private Image lifeBar;
     [SerializeField] private Image HealthCircle;

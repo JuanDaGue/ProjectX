@@ -32,12 +32,9 @@ public class SkillUIController : MonoBehaviour
         BuildDynamicSkillUI();
     }
 
-    /// <summary>
-    /// Instantiates a UI element for each skill and positions it with a defined gap.
-    /// </summary>
     private void BuildDynamicSkillUI()
     {
-        // Optional: Clear any existing UI children on the parent container.
+
         foreach (Transform child in skillsParent)
         {
             Destroy(child.gameObject);
@@ -63,13 +60,13 @@ public class SkillUIController : MonoBehaviour
             RectTransform rt = uiObj.GetComponent<RectTransform>();
             if (rt != null)
             {
-                // Here we assume each UI element has a defined width.
+               
                 float elementWidth = rt.sizeDelta.x;
-                // Set the anchoredPosition such that each skill is placed side-by-side with a gap.
+
                 rt.anchoredPosition = new Vector2(index * (elementWidth + gapBetweenSkills), rt.anchoredPosition.y);
             }
 
-            // Start updating the UI element's cooldown visuals.
+  
             StartCoroutine(UpdateSkillUI(uiSkill));
 
             index++;
@@ -83,11 +80,11 @@ public class SkillUIController : MonoBehaviour
     {
         while (uiSkill != null && uiSkill.slot != null)
         {
-            // Get the current cooldown progress for the skill (0 for ready, 1 for full cooldown)
+
             float cooldownProgress = skillSystem.GetCooldownProgress(uiSkill.slot.skill.skillID);
             bool isOnCooldown = uiSkill.slot.isOnCooldown;
 
-            // Interpolate the icon color based on cooldown progress.
+            
             Color targetColor = isOnCooldown ?
                 Color.Lerp(readyColor, cooldownColor, cooldownProgress) :
                 readyColor;
