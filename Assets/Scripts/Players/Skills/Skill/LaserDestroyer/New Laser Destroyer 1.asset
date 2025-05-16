@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a05b576fcb43d84c91f3ebec275f05a, type: 3}
-  m_Name: New Laser Destroyer
+  m_Name: New Laser Destroyer 1
   m_EditorClassIdentifier: 
   skillID: 1
   skillName: Laser
@@ -18,7 +18,7 @@ MonoBehaviour:
   cooldown: 5
   icon: {fileID: 21300000, guid: 53085f18b2c38eb4e8539c23811c3347, type: 3}
   soundEffect: {fileID: 0}
-  visualEffect: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
+  visualEffect: {fileID: 748745334096608667, guid: 5dc87e77cdfccf74e859a0b55a434283, type: 3}
   laserRange: 20
   damagePerSecond: 30
   targetLayers:

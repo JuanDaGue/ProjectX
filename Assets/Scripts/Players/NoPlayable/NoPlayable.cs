@@ -46,7 +46,7 @@ public class NoPlayable : Carrier
         
         if (life.Current <= 0)
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
     }
 }

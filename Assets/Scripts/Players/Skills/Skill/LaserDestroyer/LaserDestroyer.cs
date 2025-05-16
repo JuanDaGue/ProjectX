@@ -8,18 +8,53 @@ public class LaserDestroyer : Skill
     [SerializeField] private float laserRange = 20f;
     [SerializeField] private float damagePerSecond = 30f;
     [SerializeField] private LayerMask targetLayers;
+    [SerializeField] private float laserWidth = 0.1f;
     
     private Transform playerTransform;
     private LineRenderer laserLine;
-    private bool isActive;
+    private Coroutine laserRoutine;
+    private MonoBehaviour coroutineRunner;
 
     public override void Use(GameObject user)
     {
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        //Debug.Log(playerTransform);
-        laserLine = playerTransform.GetComponentInChildren<LineRenderer>();
-        
-        if (!isActive)
+        Debug.Log("using laser destroyer");
+        if (user == null)
+        {
+            Debug.LogError("User is null!");
+            return;
+        }
+        // Get references once
+        if (playerTransform == null)
+        {
+            Debug.Log("Initializing LaserDestroyer");
+            playerTransform = user.transform;
+            coroutineRunner = user.GetComponent<MonoBehaviour>();
+            laserLine = user.GetComponentInChildren<LineRenderer>();
+
+            if (laserLine == null)
+            {
+                Debug.LogError("No LineRenderer found on player!");
+                return;
+            }
+
+            InitializeLaser();
+        }
+        else
+        {
+            Debug.Log("LaserDestroyer already initialized");
+            playerTransform = user.transform;
+            coroutineRunner = user.GetComponent<MonoBehaviour>();
+            laserLine = user.GetComponentInChildren<LineRenderer>();
+
+            if (laserLine == null)
+            {
+                Debug.LogError("No LineRenderer found on player!");
+                return;
+            }
+            InitializeLaser();
+        }
+
+        if (laserRoutine == null)
         {
             StartLaser();
         }
@@ -29,18 +64,26 @@ public class LaserDestroyer : Skill
         }
     }
 
+    private void InitializeLaser()
+    {
+        laserLine.positionCount = 2;
+        laserLine.startWidth = laserWidth;
+        laserLine.endWidth = laserWidth;
+        laserLine.enabled = false;
+    }
+
     private void StartLaser()
     {
-        isActive = true;
+        if (coroutineRunner == null) return;
+        
         laserLine.enabled = true;
-        //playerTransform.StartCoroutine(LaserRoutine());
-        LaserRoutine();
-        Debug.Log("Destructor Ray activated! Enemies beware.");
+        laserRoutine = coroutineRunner.StartCoroutine(LaserRoutine());
+        Debug.Log("Laser activated!");
     }
 
     private IEnumerator LaserRoutine()
     {
-        while (isActive)
+        while (true)
         {
             UpdateLaser();
             ApplyDamage();
@@ -50,23 +93,29 @@ public class LaserDestroyer : Skill
 
     private void UpdateLaser()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(playerTransform.position, playerTransform.forward, out hit, laserRange, targetLayers))
+        Vector3 start = playerTransform.position + playerTransform.up * 0.7f;
+        Vector3 end = start + playerTransform.forward * laserRange;
+
+        if (Physics.Raycast(start, playerTransform.forward, out RaycastHit hit, laserRange, targetLayers))
         {
-            laserLine.SetPosition(0, playerTransform.position);
-            laserLine.SetPosition(1, hit.point);
+            end = hit.point;
         }
-        else
-        {
-            laserLine.SetPosition(0, playerTransform.position);
-            laserLine.SetPosition(1, playerTransform.position + playerTransform.forward * laserRange);
-        }
+
+        laserLine.SetPosition(0, start);
+        laserLine.SetPosition(1, end);
     }
 
     private void ApplyDamage()
     {
-        RaycastHit[] hits = Physics.RaycastAll(playerTransform.position, playerTransform.forward, laserRange, targetLayers);
-        
+        Vector3 direction = playerTransform.forward;
+        RaycastHit[] hits = Physics.SphereCastAll(
+            playerTransform.position,
+            laserWidth * 0.5f,
+            direction,
+            laserRange,
+            targetLayers
+        );
+
         foreach (var hit in hits)
         {
             if (hit.collider.TryGetComponent<LifeSystem>(out var healthSystem))
@@ -78,12 +127,18 @@ public class LaserDestroyer : Skill
 
     private void StopLaser()
     {
-        isActive = false;
+        if (laserRoutine != null)
+        {
+            coroutineRunner.StopCoroutine(laserRoutine);
+            laserRoutine = null;
+        }
         laserLine.enabled = false;
+        Debug.Log("Laser deactivated!");
     }
 
     public override void Cancel()
     {
         StopLaser();
+        playerTransform = null;
     }
 }

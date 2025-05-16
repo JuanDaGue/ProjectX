@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Teleport", menuName = "Skills/Teleport")]
 public class Teleport : Skill
 {
-    public float teleportDistance = 10f;
+    public float teleportDistance = 20f;
 
     public override void Use(GameObject user)
     {

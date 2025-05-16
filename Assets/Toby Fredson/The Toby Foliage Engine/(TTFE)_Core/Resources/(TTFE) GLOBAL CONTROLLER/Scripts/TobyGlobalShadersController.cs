@@ -73,7 +73,7 @@ namespace TobyFredson
             matsTreeBillboard.Clear();
 			matsGlobalController.Clear();
 
-            var renderers = FindObjectsOfType<Renderer>();
+            var renderers = FindObjectsByType<Renderer>(FindObjectsSortMode.None);
 
             foreach (var ren in renderers)
             {

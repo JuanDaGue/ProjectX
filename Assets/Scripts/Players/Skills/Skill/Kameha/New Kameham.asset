@@ -18,7 +18,7 @@ MonoBehaviour:
   cooldown: 5
   icon: {fileID: 21300000, guid: 33470548a8c102c45bec7658b3637d33, type: 3}
   soundEffect: {fileID: 0}
-  visualEffect: {fileID: 0}
+  visualEffect: {fileID: 748745334096608667, guid: 5dc87e77cdfccf74e859a0b55a434283, type: 3}
   kamehamehaPrefab: {fileID: 748745334096608667, guid: 5dc87e77cdfccf74e859a0b55a434283, type: 3}
   projectileSpeed: 20
   maxChargeTime: 2
