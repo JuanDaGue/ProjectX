@@ -25,6 +25,8 @@ public class NoPlayable : Carrier
         life = GetComponent<LifeSystem>();
         animator = GetComponent<Animator>();
         healthUI.UpdateHealth(life.Current, life.Max);
+
+        life.OnDeath.AddListener(() => StartCoroutine(DestroyAfterDeathAnimation()));
     }
 
     protected virtual void Update()
@@ -68,7 +70,7 @@ public class NoPlayable : Carrier
 
     public override void TakeDamage(float damage)
     {
-        if (isDying) return; // Evitar múltiples llamadas a muerte
+        ///if (isDying) return;
 
         life.TakeDamage(damage);
         Debug.Log("Life is " + life.Current);
@@ -80,8 +82,8 @@ public class NoPlayable : Carrier
 
             if (animator != null)
                 animator.SetTrigger("Death"); // Trigger para animación de muerte
-
-            StartCoroutine(DestroyAfterDeathAnimation());
+            Destroy(gameObject);
+            
         }
     }
 
