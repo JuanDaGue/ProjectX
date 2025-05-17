@@ -49,10 +49,10 @@ using UnityEngine;
         }
     void OnTriggerStay(Collider other)
     {
-        Debug.Log("DamageZone: " + other.name); 
+        //Debug.Log("DamageZone: " + other.name); 
         if (other.CompareTag("Enemy"))
         {
-            Debug.Log("DamageZone: " + other.name);
+            //Debug.Log("DamageZone: " + other.name);
             if (other.TryGetComponent<LifeSystem>(out LifeSystem health))  // Get health component
             if (health != null)
             {

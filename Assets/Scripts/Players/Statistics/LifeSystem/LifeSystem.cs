@@ -6,9 +6,14 @@ public class LifeSystem : Statistics
     [Header("Health Events")]
     public UnityEvent OnDeath;
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
-        if (damage < 0) return;
+        if (damage < 0)
+        {
+            //OnDeath.Invoke();
+            Destroy(gameObject);
+            return;
+        }
         Subtract(damage);
         if (Current <= Min) OnDeath?.Invoke();
     }

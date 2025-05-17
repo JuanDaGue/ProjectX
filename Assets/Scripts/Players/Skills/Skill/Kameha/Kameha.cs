@@ -26,7 +26,7 @@ public class Kamehameha : Skill
     private IEnumerator ChargingRoutine(GameObject user)
     {
         // Charge phase
-        while (chargeTimer < maxChargeTime && Input.GetKey(KeyCode.Mouse0))
+        while (chargeTimer < maxChargeTime && Input.GetKey(KeyCode.X))
         {
             chargeTimer += Time.deltaTime;
             // Add visual/audio feedback for charging

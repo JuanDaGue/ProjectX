@@ -61,6 +61,10 @@ public  class Statistics: MonoBehaviour
     public virtual void Subtract(float amount)
     {
         if (amount <= 0) return;
+        // {
+        //     Destroy(gameObject);
+        //     return;
+        // }
         currentValue -= amount;
         ClampCurrentValue();
         NotifyValueChanged();

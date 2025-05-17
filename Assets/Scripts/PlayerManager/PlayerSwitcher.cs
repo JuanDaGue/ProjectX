@@ -4,10 +4,10 @@ using TMPro; // Required for TextMeshProUGUI
 public class PlayerSwitcher : MonoBehaviour
 {
     [Header("Player References")]
-    [Tooltip("First player's GameObject (should be active at start).")]
+    [Tooltip("First player's GameObject")]
     [SerializeField] private GameObject playerOne;
     
-    [Tooltip("Second player's GameObject (should be inactive at start).")]
+    [Tooltip("Second player's GameObject")]
     [SerializeField] private GameObject playerTwo;
     public TextMeshProUGUI textMeshProUGUI;
     // Flag to track which player is currently active.
@@ -18,7 +18,7 @@ public class PlayerSwitcher : MonoBehaviour
         // Ensure that both players are assigned.
         if (playerOne == null || playerTwo == null)
         {
-            Debug.LogError("Both playerOne and playerTwo must be assigned in the Inspector.");
+            Debug.LogError("No player in the Inspector.");
             return;
         }
         textMeshProUGUI.text = "Switch player press F or Right Mouse Button";

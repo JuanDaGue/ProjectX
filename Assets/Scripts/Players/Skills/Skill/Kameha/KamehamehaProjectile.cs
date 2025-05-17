@@ -24,17 +24,18 @@ public class KamehamehaProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Kameha: " + other.name + "   The tag is " + other.tag);
+        //Debug.Log("Kameha: " + other.name + "   The tag is " + other.tag);
         
         // Check if the collider is an impact target.
-        if (other.CompareTag("Terrain") || other.CompareTag("Enemy") || other.CompareTag("Player"))
+        if ( other.CompareTag("Enemy") )
         {
-            Debug.Log("Kameha: Collision with " + other.name);
 
             // If the target has a LifeSystem component, apply damage.
             if (other.TryGetComponent<LifeSystem>(out var lifeSystem))
             {
+                Debug.Log("Kameha: Collision with " + other.name);
                 lifeSystem.TakeDamage(damage);
+                
             }
             
 
